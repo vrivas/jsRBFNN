@@ -1,6 +1,8 @@
 # jsRBFNN
 Radial basis Function Neural Networks in Javascript
 
+LMS is used to train.
+
 Example of use: 
 
     <!DOCTYPE html>
