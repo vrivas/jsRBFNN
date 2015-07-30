@@ -45,7 +45,7 @@ try {
          * @param {Number} _alfa
          * @returns {Nothing}
          */
-        this.LMStrain = function (_inputs, _outputs, _numIt, _alfa) {
+        this.trainLMS = function (_inputs, _outputs, _numIt, _alfa) {
             if (_inputs.length != _outputs.length)
                 throw new RangeError("LMS train can't be done: "
                         + "inputs and outputs have different lengths; "
@@ -103,7 +103,7 @@ try {
             } else {
                 console.log(msg + "\n");
             }
-            tmp.LMStrain([
+            tmp.trainLMS([
                 [-100, -100], [100, 100] // Inputs
             ]
                     , [700, -700] // Desired outputs
