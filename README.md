@@ -21,3 +21,7 @@ Example of use:
             </script>
     </body>
 </html>
+
+## Code style
+
+The style for the code is controlled by Hound (https://houndci.com/)
