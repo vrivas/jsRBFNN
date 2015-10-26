@@ -24,6 +24,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  * 
  */
+ 
+ // Since 26/Oct/2015, code style is controlled by Hound
 
 try {
 // Testing the existence of required libraries
