@@ -1,0 +1,19 @@
+{
+  "name": "jsRBFNN",
+  "version": "0.0.0",
+  "description": "Radial Basis Function Neural Networks in Javascript",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://vrivas@github.com/vrivas/jsRBFNN.git"
+  },
+  "author": "Victor Rivas <vrivas@ujaen.es>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vrivas/jsRBFNN/issues"
+  },
+  "homepage": "https://github.com/vrivas/jsRBFNN"
+}
