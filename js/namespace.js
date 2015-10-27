@@ -62,3 +62,6 @@ js_rbfnn.distance = function (a, b) {
             }, 0)
             );
 }
+
+
+if( typeof module!=='undefined' ) module.exports=js_rbfnn;

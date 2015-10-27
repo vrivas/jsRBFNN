@@ -25,6 +25,9 @@
  * 
  */
 
+if (typeof require !== 'undefined')
+    js_rbfnn = require('./namespace.js');
+
 try {
     // Namespace has to have been loaded
 
@@ -62,45 +65,67 @@ try {
          * Returns the size (length) of the center
          * @returns {Integer} The length or size of the center.
          */
-        this.size=function() {
+        this.size = function () {
             return this.center.length;
         }
-        /**
-         * Test function for RBFNeuron
-         * @returns {undefined}
-         */
-        this.test = function () {
-            var tmp = new js_rbfnn.RBFNeuron([1, 2], 3);
-            try {
-                alert(tmp.apply([1, 2])); // Must return 1
-                alert(tmp.apply([1, 2, 3])); // Must throw an exception
-            } catch (e) {
-                console.log("Capturing exception: ", e.message)
-            }
-            try {
-                tmp2 = tmp.copy();
-                alert(tmp2.apply([1, 2])); // Must return 1
-                
-                console.log( "Changing copy... does affect original?");
-                console.log( " - Before");
-                console.log( "tmp.center[0] is ", tmp.center[0] );
-                console.log( "tmp2.center[0] is ", tmp2.center[0] );
-                console.log( "tmp.radius is ", tmp.radius );
-                console.log( "tmp2.radius] is ", tmp2.radius );
-                tmp2.center[0]=89;
-                tmp2.radius=12;
-                console.log( " - After (center and radius should be different: 89 and 12, resp.");
-                console.log( "tmp.center[0] is ", tmp.center[0] );
-                console.log( "tmp2.center[0] is ", tmp2.center[0] );
-                console.log( "tmp.radius is ", tmp.radius );
-                console.log( "tmp2.radius] is ", tmp2.radius );
-                
-            } catch (e) {
-                console.log("Capturing exception: ", e.message)
-            }
+    }
+    /**
+     * Test function for RBFNeuron
+     * @param {string} _div Name of the div where output will be written, or null to write in console.log
+     * @returns {undefined}
+     */
+    js_rbfnn.test_neuron = function (_div) {
+        var tmp = new js_rbfnn.RBFNeuron([1, 2], 3);
+        _id = (typeof document !== 'undefined') ? document.getElementById(_id) : null;
+        var msg = "";
+
+        msg = "Testing RBFNeuron...\n";
+        msg = "  Testing neuron.apply...\n"
+        try {
+            msg += "    Should return 1: " + tmp.apply([1, 2])+"\n"; // Must return 1
+            msg += "    Should throw an exception: " + tmp.apply([1, 2, 3])+"\n"; // Must throw an exception
+        } catch (e) {
+            msg += "    Capturing exception: " + e.message+"\n";
+        }
+
+        if (_id) {
+            _id.innerHTML = "<pre>" + msg + "</pre>"+"\n";
+        } else {
+            console.log(msg);
+        }
+
+        try {
+            msg = "  Testing copy of neurons...\n";
+
+            tmp2 = tmp.copy();
+            msg += "    Should return 1: " + mp2.apply([1, 2])+"\n"; // Must return 1
+
+            msg += "    Changing copy... does affect original?"+"\n";
+            msg += "     - Before"+"\n";
+            msg += "       tmp.center[0] is " + tmp.center[0]+"\n";
+            msg += "       tmp2.center[0] is " + tmp2.center[0]+"\n";
+            msg += "       tmp.radius is " + tmp.radius+"\n";
+            msg += "       tmp2.radius] is " + tmp2.radius+"\n";
+            tmp2.center[0] = 89;
+            tmp2.radius = 12;
+            msg += "     - After (center and radius should be different: 89 and 12, resp."+"\n";
+            msg += "       tmp.center[0] is " + tmp.center[0]+"\n";
+            msg += "       tmp2.center[0] is " + tmp2.center[0]+"\n";
+            msg += "       tmp.radius is " + tmp.radius+"\n";
+            msg += "       tmp2.radius is " + tmp2.radius+"\n";
+
+        } catch (e) {
+            msg += "Capturing exception: " + e.message+"\n";
+        }
+        if (_id) {
+            _id.innerHTML = "<pre>" + msg + "</pre>"+"\n";
+        } else {
+            console.log(msg);
         }
     }
+
 
 } catch (e) {
     console.log(e.message);
 }
+

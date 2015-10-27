@@ -24,8 +24,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  * 
  */
- 
- // Since 26/Oct/2015, code style is controlled by Hound
+
+// Since 26/Oct/2015, code style is controlled by Hound
+
+if (typeof require !== 'undefined')
+    js_rbfnn = require('./namespace.js');
 
 try {
 // Testing the existence of required libraries
@@ -155,22 +158,23 @@ try {
      * Function to test if RBFNNet works properly
      * @returns {undefined}
      */
-    js_rbfnn.test = function (_id) {
+    js_rbfnn.test_net = function (_id) {
         var tmp = new js_rbfnn.RBFNNet(
                 [new js_rbfnn.RBFNeuron([-100, -100], 1)
                             , new js_rbfnn.RBFNeuron([100, 100], 10)]
                 , [10, 20]
                 , 100);
-        _id = document.getElementById(_id);
-        var msg = "";
-        msg = "Before training: \n"
+
+        _id = (typeof document !== 'undefined') ? document.getElementById(_id) : null;
+        var msg = "Testing training...\n";
+        msg = "  Before training: \n"
                 + "     700 is " + tmp.apply([-100, -100]) + "\n"
                 + "     , -700 is " + tmp.apply([100, 100]);
         error = js_rbfnn.distance([700, -700], [tmp.apply([-100, -100]), tmp.apply([100, 100])]);
         msg += "\n"
-                + "Error is " + error;
+                + "  Error is " + error;
         if (_id) {
-            _id.innerHTML += "<p>".tmp.toString() + "</p><p>" + msg + "</p>\n";
+            _id.innerHTML += "<pre>" + tmp.toString() + "</pre><pre>" + msg + "</pre>\n";
         } else {
             console.log(tmp.toString() + "\n" + msg + "\n");
         }
@@ -181,28 +185,36 @@ try {
                 , 100 // Iterations
                 , 0.3); // Alfa
 
-        msg = "After training: \n"
+        msg = "  After training: \n"
                 + "     700 is " + tmp.apply([-100, -100]) + "\n"
                 + "     , -700 is " + tmp.apply([100, 100]);
         error = js_rbfnn.distance([700, -700], [tmp.apply([-100, -100]), tmp.apply([100, 100])]);
         msg += "\n"
-                + "Error is " + error;
+                + "  Error is " + error;
         if (_id) {
-            _id.innerHTML += "<p>" + msg + "</p>\n";
+            _id.innerHTML += "<pre>" + msg + "</pre>\n";
         } else {
             console.log(msg + "\n");
         }
 
 
-        console.log("\n\nTesting copy...\n\n");
+        msg = "Testing copy...\n";
+
         tmp2 = tmp.copy();
-        console.log("Before changing...");
-        console.log("Original is ", tmp.neurons[0].center[0]);
-        console.log("Copy is ", tmp2.neurons[0].center[0]);
+        msg += "Before changing...\n";
+        msg += "Original is " + tmp.neurons[0].center[0] + "\n";
+        msg += "Copy is " + tmp2.neurons[0].center[0] + "\n";
         tmp2.neurons[0].center[0] = 9876;
-        console.log("After changing tmp2.neurons[0].center[0] to 9876...");
-        console.log("Original is ", tmp.neurons[0].center[0]);
-        console.log("Copy is ", tmp2.neurons[0].center[0]);
+        msg += "After changing tmp2.neurons[0].center[0] to 9876..." + "\n";
+        msg += "Original is " + tmp.neurons[0].center[0] + "\n";
+        msg += "Copy is " + tmp2.neurons[0].center[0] + "\n";
+
+        if (_id) {
+            _id.innerHTML += "<pre>" + msg + "</pre>\n";
+
+        } else {
+            console.log(msg);
+        }
     };
 } catch (e) {
     console.log(e.message);
