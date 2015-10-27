@@ -76,11 +76,11 @@ try {
      */
     js_rbfnn.test_neuron = function (_div) {
         var tmp = new js_rbfnn.RBFNeuron([1, 2], 3);
-        _id = (typeof document !== 'undefined') ? document.getElementById(_id) : null;
+        _div = (typeof document !== 'undefined') ? document.getElementById(_div) : null;
         var msg = "";
 
         msg = "Testing RBFNeuron...\n";
-        msg = "  Testing neuron.apply...\n"
+        msg += "  Testing neuron.apply...\n"
         try {
             msg += "    Should return 1: " + tmp.apply([1, 2])+"\n"; // Must return 1
             msg += "    Should throw an exception: " + tmp.apply([1, 2, 3])+"\n"; // Must throw an exception
@@ -88,8 +88,8 @@ try {
             msg += "    Capturing exception: " + e.message+"\n";
         }
 
-        if (_id) {
-            _id.innerHTML = "<pre>" + msg + "</pre>"+"\n";
+        if (_div) {
+            _div.innerHTML += "<pre>" + msg + "</pre>"+"\n";
         } else {
             console.log(msg);
         }
@@ -98,7 +98,7 @@ try {
             msg = "  Testing copy of neurons...\n";
 
             tmp2 = tmp.copy();
-            msg += "    Should return 1: " + mp2.apply([1, 2])+"\n"; // Must return 1
+            msg += "    Should return 1: " + tmp2.apply([1, 2])+"\n"; // Must return 1
 
             msg += "    Changing copy... does affect original?"+"\n";
             msg += "     - Before"+"\n";
@@ -117,8 +117,8 @@ try {
         } catch (e) {
             msg += "Capturing exception: " + e.message+"\n";
         }
-        if (_id) {
-            _id.innerHTML = "<pre>" + msg + "</pre>"+"\n";
+        if (_div) {
+            _div.innerHTML += "<pre>" + msg + "</pre>"+"\n";
         } else {
             console.log(msg);
         }
